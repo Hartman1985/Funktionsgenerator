@@ -4,7 +4,7 @@
 #include<unistd.h>
 
 int main(int argc,char*argv[]){
-	int a,b,c,d,min,max,max1,x,n;
+	int a,b,c,d,min,max,max1,x,n,last;
 	int option;
 	float Sinuswerte[100];
 	int Rechteckwerte[100];
@@ -47,18 +47,21 @@ while((option=getopt(argc,argv,"v,s,r,h"))!=-1)
 					scanf("%i",&n);
 					output_stream = fopen("Werte.txt", "w");
 					c=0;
+					last=0;
 					fprintf(output_stream, "Rechteckfuktionswerte:\n ");
 					for(int d=1;d<=max1;d++){
 								x=0;
-						
+						c=last;
 					for(int i=0;i<=n+1;i++){
 						
 						Rechteckwerte[i]=Rechteck(n,max,x);
-						fprintf(output_stream, "X=%i ",c);
-						fprintf(output_stream, "Y=%i \n",Rechteckwerte[i]);
+						fprintf(output_stream, "%i; ",c);
+						last=c;
+						fprintf(output_stream, "%i; \n",Rechteckwerte[i]);
 						c++;
-						if(i>=n/2){
+						if(i==n/2){
 								x=1;
+								c--;
 						}
 					}
 					}
